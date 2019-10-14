@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Contact us
+{% endblock %}
+
+{% block front %}
+   <div class="mb-5 text-center">
+      <h1 class="text-white font-weight-bold">Contact Us</h1>
+      <p>Find your dream jobs in our powerful career website template.</p>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section class="site-section" id="next-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mb-5 mb-lg-0">
+            <form action="" class="" method="post">
+              {% csrf_token %}
+        
+              <div class="row form-group">
+    
+                <div class="col-md-12">
+                  <label class="text-black" for="email" name="username">Email</label>
+                  <input type="email" id="email" class="form-control" name="username">
+                </div>
+              </div>
+   
+              <div class="row form-group">
+    
+                <div class="col-md-12">
+                  <label class="text-black" for="subject">Password</label>
+                  <input type="password" id="subject" class="form-control" name="password">
+                </div>
+              </div>
+    
+    
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="submit" value="Login" class="btn btn-primary btn-md text-white">
+                </div>
+              </div>
+    
+    
+            </form>
+            <a href="{% url 'password_reset'%}"><p>forget password?</p></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock%}

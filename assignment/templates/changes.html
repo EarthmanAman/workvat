@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Admin
+{% endblock %}
+{% block content %}
+	<div class="container">
+		<div align="center" class="alert alert-heading">
+			<h1>Assignments</h1>	
+		</div>
+		
+
+		<div class="row">
+			<div class="col-md-12">	
+				<table class="table">
+					<thead>
+						<th>TYPE</th>
+						<th>NAME</th>
+						<!-- <th>DESCRIPTION</th> -->
+						<th>MY PRICE</th>
+						
+						<th>MORE</th>
+					</thead>
+					<tbody>
+						{% for assignment in assignments %}
+							{% if assignment.assignmentchange_set.all %}
+							<tr>
+								<td>{{assignment.assignmentType.name}}</td>
+								<td>{{assignment.title}}</td>
+								<!-- <td>{{assignment.desc|safe}}</td> -->
+								<td>{{assignment.assignmentpayment.userPrice}}</td>
+								
+								<td><a href="{% url 'assignment:singleAssignment' assignment.id%}">
+									<button class="btn btn-primary">More</button></td>
+								
+							</tr>
+					
+							{% endif %}
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		
+		</div>
+	</div>
+	
+{% endblock %}

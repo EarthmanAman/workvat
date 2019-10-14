@@ -1,0 +1,32 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block title %}
+  Activate
+{% endblock %}
+{% block front %}
+	<div class="mb-5 text-center">
+      <h1 class="text-white font-weight-bold">Update Account</h1>
+      <p>Update Your account</p>
+    </div>
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-lg-6 offset-3">
+        <div align="center">
+          <h2>Enter your new password</h2>    
+        </div>
+      
+      <form method="post" class="form-group">
+        {% csrf_token %}
+        <label>Create Password</label>
+        <input type="password" name="password" class="form-control">
+        <label>Confirm new password</label>
+        <input type="password" name="password2" class="form-control"><br>
+        <button type="submit" class="btn btn-primary"> save </button>
+      </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

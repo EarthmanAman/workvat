@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Services
+{% endblock %}
+
+{% block description %}
+      <meta name="description" content="Our services">
+{% endblock %}
+
+{% block front %}
+	<div class="mb-5 text-center">
+      <h1 class="text-white font-weight-bold">Our Services</h1>
+      <p>Find your dream jobs in our powerful career website template.</p>
+    </div>
+{% endblock%}
+
+{% block content %}
+	
+<section class="site-section services-section bg-light block__62849" id="next-section">
+  <div class="container">
+
+    <div class="row">
+      {% for service in services%}
+      <div class="col-sm-6 col-md-4 col-lg-3 mb-3 mb-lg-3">
+
+        <a class="block__16443 text-center d-block">
+          <span class="custom-icon mx-auto"><span class="icon-tasks d-block"></span></span>
+          <h3>{{service.name}}</h3>
+          <p>{{service.desc}}</p>
+        </a>
+
+      </div>
+      {% endfor %}
+    </div>
+
+
+  </div>
+</section>
+
+ <section class="bg-light pt-5 testimony-full">
+        
+        <div class="owl-carousel single-carousel">
+
+        {% for testimonial in testimonials %}
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 mx-auto " >
+                <img class="img-fluid mx-auto" src="{% static 'images/user.jpeg' %}" alt="Image">
+                <blockquote>
+                  <p>&ldquo;{{testimonial.content | safe}}.&rdquo;</p>
+                  <p><cite> &mdash; {{testimonial.user.first_name}} {{testimonial.user.last_name}}</cite></p>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+      </div>
+
+    </section>
+
+{% endblock %}

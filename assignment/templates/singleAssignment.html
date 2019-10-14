@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Job
+{% endblock %}
+
+{% block front %}
+	<div class="col-md-7">
+	    <h1 class="text-white font-weight-bold">My Job</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+	    <section class="site-section">
+      <div class="container">
+         <div class="row">
+          {% if request.user.is_superuser %}
+            {% if assignment.file%}
+            <div class="col-md-2">
+              <a href="{% url 'assignment:download_assignment' assignment.id %}"><button class="btn btn-warning">Download File</button></a>
+            </div>
+            {% else %}
+               <div class="col-md-2">
+              <a href="{% url 'assignment:download_assignment' assignment.id %}"><button class="btn btn-warning" disabled>Download File</button></a>
+            </div>
+            {% endif %}
+          <div class="col-md-8">
+            <form action="" method="post" class="form-group" enctype="multipart/form-data">
+              {% csrf_token %}
+              <input type="file" name="file" required>
+            <button class="btn btn-primary" type="submit">Upload File</button>
+          </form>
+          </div>
+          {% endif %}
+        </div>
+        <div class="row align-items-center mb-5">
+
+          <div class="col-lg-8 mb-4 mb-lg-0">
+            <div class="d-flex align-items-center">
+              <div class="border p-2 d-inline-block mr-3 rounded">
+                <!-- <img src="{% static 'images/featured-listing-1.jpg' %}" alt="Free Website Template By Free-Template.co"> -->
+                <div class="icon-tasks"></div>
+              </div>
+              <div>
+                <h2>{{assignment.title}}</h2>
+              <!--   <div>
+                  <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span>Puma</span>
+                  <span class="m-2"><span class="icon-room mr-2"></span>New York City</span>
+                  <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">Full
+                      Time</span></span>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-6">
+                {% if assignment.completed%}
+                <a class="btn btn-block btn-warning bt n-md">Completed</a>
+                {% elif assignment.accepted %}
+                <a class="btn btn-block btn-warning bt n-md">Accepted</a>
+                {% else %}
+                   <button class="btn btn-block  btn-danger bt n-md" data-toggle="modal" data-target="#delete">Delete</button>
+                {% endif %}
+              </div>
+              
+              <div class="col-6">
+                <!-- <a href="#payment" class="btn btn-block btn-primary btn-md">Pay</a> -->
+                {{form.render}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="mb-5">
+              <!-- <figure class="mb-5"><img src="{% static 'images/sq_img_1.jpg' %}" alt="Free Website Template by Free-Template.co"
+                  class="img-fluid rounded"></figure> -->
+              <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Job
+                Description</h3>
+                <p>{{assignment.desc | safe}}</p>
+            </div>
+             <div class="mb-5">
+              <!-- <figure class="mb-5"><img src="{% static 'images/sq_img_1.jpg' %}" alt="Free Website Template by Free-Template.co"
+                  class="img-fluid rounded"></figure> -->
+              <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Job
+                Requirements</h3>
+                <p><strong>Citation Method : </strong>{{assignment.citation}}</p>
+                <p><strong>Font Family : </strong>{{assignment.font}}</p>
+                <p><strong>Font Size : </strong>{{assignment.fontSize}}</p>
+            </div>
+              {% if request.user.is_superuser %}
+              <div class="mb-5">
+              <!-- <figure class="mb-5"><img src="{% static 'images/sq_img_1.jpg' %}" alt="Free Website Template by Free-Template.co"
+                  class="img-fluid rounded"></figure> -->
+                  <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Changes</h3><hr>
+              {% for change in assignment.assignmentchange_set.all%}
+              
+                <p><strong>Title : </strong>{{change.title}}</p>
+                <p><strong>Change : </strong>{{change.desc}}</p>
+               <hr>
+                {% endfor %}
+            </div>
+              {% endif %}
+          </div>
+          <div class="col-lg-4">
+            <div class="bg-light p-3 border rounded mb-4">
+              <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
+              <ul class="list-unstyled pl-3 mb-0">
+                <li class="mb-2"><strong class="text-black">Job Type:</strong> {{assignment.assignmentType.name}}</li>
+                <li class="mb-2"><strong class="text-black">Published on:</strong> {{assignment.dateRequested}}</li>
+                 <li class="mb-2"><strong class="text-black">Expected on:</strong> {{assignment.expectedDate}}</li>
+                  <li class="mb-2"><strong class="text-black">Currency:</strong> {{assignment.assignmentpayment.currency}}</li>
+                 <li class="mb-2"><strong class="text-black">Price:</strong> {{assignment.assignmentpayment.userPrice}}</li>
+                <li class="mb-2"><strong class="text-black">Payment Status:
+                  {% if assignment.assignmentpayment.fullPaid%}
+                    </strong> Full Paid</li>
+                  {% elif assignment.assignmentpayment.halfPaid%}
+                    </strong> Half Paid</li>
+                  {% else%}
+                    </strong>Unpaid</li>
+                  {% endif%}
+               <!--  
+                <li class="mb-2"><strong class="text-black">Job Location:</strong> New ork City</li>
+                
+                <li class="mb-2"><strong class="text-black">Gender:</strong> Any</li>
+                <li class="mb-2"><strong class="text-black">Application Deadline:</strong> April 28, 2019</li> -->
+              </ul>
+            </div>
+    
+           <!--  <div class="bg-light p-3 border rounded">
+              <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Share</h3>
+              <div class="px-3">
+                <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-facebook"></span></a>
+                <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>
+                <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-linkedin"></span></a>
+                <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-pinterest"></span></a>
+              </div>
+            </div> -->
+            {% if assignment.is_sample %}
+            {% elif not assignment.completed %}
+            {% else %}
+            <div class="bg-light p-3 border rounded">
+              <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Request Change {% if assignment.assignmentchange_set.last.done %} <p style="color:red;">(You have exceed your change times)</p>{% endif %}</h3>
+              <div class="px-3">
+                {% if assignment.assignmentchange_set.last.done %}
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat" disabled>Request</button>
+               {% else %}
+                 <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Request</button>
+               {% endif %}
+                <!-- <button class="btn btn-secondary" onclick="displayUpload(event)">Change document</button> -->
+              <!--   <a href="#" class="pt-3 pb-3 pr-3 pl-0"></a>
+                <a href="#" class="pt-3 pb-3 pr-3 pl-0"></a> -->
+              </div>
+            </div><br>
+            {% endif %}
+              <div class="bg-light p-3 border rounded" id="upload" style="display: none;" >
+              <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Update Job</h3>
+              <div class="px-3">
+                <form action="" method="post" class="form-group" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input type="file" name="file" class="form-control" required><br>
+                <!-- <a href="#" class="pt-3 pb-3 pr-3 pl-0"><button class="btn btn-secondary">Change document</button></a> -->
+              <!--   <a href="#" class="pt-3 pb-3 pr-3 pl-0"></a>
+                <a href="#" class="pt-3 pb-3 pr-3 pl-0"></a> -->
+                <button type="submit" class="btn btn-primary">Change</button>
+              </form>
+              </div>
+            </div>
+            
+             <div class="bg-light p-3 border rounded">
+              <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Download finished job</h3>
+              <div class="px-3">
+               
+                {% if assignment.assignmentmedia%}
+                 <a href="{% url 'assignment:downloadFinished' assignment.assignmentmedia.id %}" class="pt-3 pb-3 pr-3 pl-0"><button class="btn btn-primary">Download</button></a>
+                {% endif %}
+              
+                <!-- <button class="btn btn-secondary" onclick="displayUpload(event)">Change document</button> -->
+              <!--   <a href="#" class="pt-3 pb-3 pr-3 pl-0"></a>
+                <a href="#" class="pt-3 pb-3 pr-3 pl-0"></a> -->
+              </div>
+            </div><br>
+             </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+  
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <form action="{% url 'assignment:assignmentChange' %}" method="post">
+        {% csrf_token %}
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Enter Your Changes</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="id" value="{{assignment.id}}">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Title:</label>
+                  <input type="text" class="form-control" id="recipient-name" name="title" required>
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Description:</label>
+                  <textarea class="form-control" id="message-text" name="desc" required></textarea>
+                </div>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Send Complain</button>
+            </div>
+          </div>
+        </div>
+      </form>
+</div>
+
+  <!-- Modal -->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are You sure you want to delete the job?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <a href="{% url 'assignment:deleteAssignment' assignment.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+    <script type="text/javascript">
+      function displayUpload(event){
+        event.preventDefault();
+      
+         if (document.getElementById("upload").style.display == "none"){
+          document.getElementById("upload").style.display = "block";
+         }
+         else{
+          document.getElementById("upload").style.display = "none";
+         }
+      }
+    </script>
+{% endblock %}

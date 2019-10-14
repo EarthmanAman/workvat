@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Admin
+{% endblock %}
+{% block content %}
+	<div class="container">
+		<div align="center" class="alert alert-heading">
+			<h1>Assignments <a href="{% url 'assignment:changes'%}"><button>Changes</button></a></h1>
+		</div>
+		<div class="row">
+			<div class="col-md-12">	
+				<table class="table">
+					<thead>
+						<th>TYPE</th>
+						<th>NAME</th>
+						<th>MY PRICE</th>
+						<!-- <th>DETAILS</th> -->
+						<th>STATUS</th>
+						<th>COMPLETE</th>
+						<th>MORE</th>
+					</thead>
+					<tbody>
+						{% for assignment in assignments %}
+							<tr>
+								<td>{{assignment.assignmentType.name}}</td>
+								<td>{{assignment.title}}</td>
+								<td>{{assignment.assignmentpayment.userPrice}}</td>
+								<!-- <td>
+								
+										<input type="hidden" name="id" value="{{assignment.id}}">
+										<button class="btn btn-secondary" data-toggle="modal" data-target="#detail">Detail</button>
+									
+								</td> -->
+								{% if assignment.accepted %}
+								<td><a href="{% url 'assignment:accept' assignment.id %}"><button class="btn btn-warning">Accept</button></a></td>
+								{% else%}
+								<td><a href="{% url 'assignment:accept' assignment.id %}"><button class="btn btn-warning">Not Accepted</button></a></td>
+								{% endif %}
+								{% if not assignment.completed %}
+					
+								<td><a href="{% url 'assignment:completed' assignment.id %}"><button class="btn btn-warning">Uncompleted</button></a></td>
+								{% else %}
+								<td><a href="{% url 'assignment:completed' assignment.id %}"><button class="btn btn-warning">Completed</button></a></td>
+								{% endif %}
+								
+								<td><a href="{% url 'assignment:singleAssignment' assignment.id%}"><button class="btn btn-primary">More</button></a></td>
+				
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+						
+		        {% if assignments.has_other_pages %}
+		        <ul class="pagination">
+		          {% if assignments.has_previous %}
+		            <li><a href="?page={{ assignments.previous_page_number }}">&laquo;</a></li>
+		          {% else %}
+		            <li class="disabled"><span>&laquo;</span></li>
+		          {% endif %}
+		          {% for i in assignments.paginator.page_range %}
+		            {% if assignments.number == i %}
+		              <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+		            {% else %}
+		              <li><a href="?page={{ i }}">{{ i }}</a></li>
+		            {% endif %}
+		          {% endfor %}
+		          {% if assignments.has_next %}
+		            <li><a href="?page={{ assignments.next_page_number }}">&raquo;</a></li>
+		          {% else %}
+		            <li class="disabled"><span>&raquo;</span></li>
+		          {% endif %}
+		        </ul>
+		      {% endif %}
+			</div>
+
+		</div>
+	</div>
+{% endblock %}

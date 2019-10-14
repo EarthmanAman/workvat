@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+
+    <title>Workvat |  {% block title %} {% endblock %}</title>
+    {% block description %}
+      <meta name="description" content="Welcome to workvat">
+    {% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/custom-bs.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/line-icons/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+  </head>
+  <body id="top">
+
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+    
+
+    <!-- NAVBAR -->
+    <header class="site-navbar mt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="site-logo col-6"><a href="{% url 'assignment:index' %}">Workvat <img src="{% static 'images/logo.jpeg'%}" width="20" height="20"></a></div>
+
+          <nav class="mx-auto site-navigation">
+            <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
+              <li><a href="{% url 'assignment:index' %}" class="nav-link active">Home</a></li>
+              {% if request.user.is_authenticated%}
+                <li><a href="{% url 'assignment:userAssignments'%}">My jobs</a></li>
+              {% else %}
+                <li><a data-toggle="modal" data-target="#exampleModalCenter">My jobs</a></li>
+              {%endif%}
+              
+              <li><a href="{% url 'accounts:about' %}">About</a></li>
+              <li><a href="{% url 'assignment:services'%}">Services</a></li>
+              <!-- <li><a href="blog.html">Blog</a></li> -->
+              {% if request.user.is_authenticated%}
+              <li><a href="{% url 'accounts:logout' %}"><button type="button" class="btn btn-primary">
+              Logout
+            </button></a></li>
+            <!--  <li><a href="#">
+              Change Password</a></li> -->
+            {% else %}
+               <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+              Login
+            </button></li>
+            {% endif%}
+            {% if request.user.is_superuser%}
+               <li><a href="{% url 'assignment:adminAssignments' %}"><button type="button" class="btn btn-warning">
+              Jobs
+            </button></a></li>
+            {% endif%}
+            </ul>
+          </nav>
+          <!-- modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <div align="center">
+                   <!-- <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5> -->
+                </div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                   <div align="center">
+                   <h3 class="modal-title" id="exampleModalCenterTitle">Login</h3>
+                </div>
+                  <form action="{% url 'accounts:login'%}" method="post" class="form-group">
+                    {% csrf_token %}
+                    <label>Email</label>
+                    <input type="email" name="username" class="form-control" placeholder="example@mail.com" required><br>
+                   
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Password" class="form-control" required><br>
+                     <div align="center">
+                      <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                      <button type="submit" class="btn btn-primary">Login</button><br>
+                      <a href="{% url 'password_reset' %}">forget password?</a> or
+                       <a href="{% url 'assignment:index' %}">create account</a>
+                    </div>
+                </div>
+               
+                </form>
+                
+              </div>
+            </div>
+          </div>
+          <!-- modal -->
+          <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
+            <div class="ml-auto">
+              <a href="{% url 'accounts:contact'%}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-paper-plane"></span>Contact Us</a>
+              {% if request.user.is_authenticated %}
+                <a href="{% url 'password_change'%}" class="btn btn-primary border-width-2 d-none d-lg-inline-block">Change Password</a>  
+              {% endif %}
+            </div>
+
+            <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span class="icon-menu h3 m-0 p-0 mt-2"></span></a>
+          </div>
+
+        </div>
+      </div>
+    </header>
+        <section class="home-section section-hero inner-page overlay bg-image"
+      style="background-image: url('../../static/images/hero_1.jpg');" id="home-section">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-12">
+          	{% block front %}
+         <!--    <div class="mb-5 text-center">
+              <h1 class="text-white font-weight-bold">Contact Us</h1>
+              <p>Find your dream jobs in our powerful career website template.</p>
+            </div> -->
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+   {% block content %}
+   {% endblock %}
+    
+    <section class="py-5 bg-image overlay-primary fixed overlay" style="background-image: url('../../static/images/hero_1.jpg');">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            {% if request.user.is_authenticated %}
+            <h2 class="text-white">Find experience writters</h2>
+            <p class="mb-0 text-white lead">You state your price remember!!</p>
+            {% else %}
+             <h2 class="text-white">Do you need some help in your school work?</h2>
+            <p class="mb-0 text-white lead">Workvart is your best choice</p>
+            {% endif%}
+          </div>
+          <div class="col-md-3 ml-auto">
+            {% if request.user.is_authenticated %}
+             <a href="{% url 'assignment:addAssignment' %}" class="btn btn-warning btn-block btn-lg">Post a job</a>
+            {% else %}
+              <a href="{% url 'assignment:index' %}" class="btn btn-warning btn-block btn-lg">Sign Up</a>
+            {% endif%}
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <footer class="site-footer">
+
+      
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-6 col-md-3 mb-4 mb-md-0">
+            <h3>Search Trending</h3>
+            <ul class="list-unstyled">
+              {% for assignmentType in assignmentTypes%}
+              <li><a href="#"> {{assignmentType.name}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="col-6 col-md-3 mb-4 mb-md-0">
+            <h3>Company</h3>
+            <ul class="list-unstyled">
+              <li><a href="{% url 'accounts:about'%}">About Us</a></li>
+              <li><a href="{% url 'assignment:index'%}#sample_work">Sample Work</a></li>
+              <!-- <li><a href="#">Blog</a></li>
+              <li><a href="#">Resources</a></li> -->
+            </ul>
+          </div>
+          <div class="col-6 col-md-3 mb-4 mb-md-0">
+            <h3>Support</h3>
+            <ul class="list-unstyled">
+              <li><a href="mail-to:hashimathman@gmail.com">Support</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md-3 mb-4 mb-md-0">
+            <h3>Contact Us</h3>
+            <div class="footer-social">
+              <a href="https://www.facebook.com/Workvat-103761421038326/?modal=admin_todo_tour" target="_blank"><span class="icon-facebook"></span></a>
+              <a href="https://twitter.com/workvat" target="_blank"><span class="icon-twitter"></span></a>
+              <a href="https://www.instagram.com/work_vat/" target="_blank"><span class="icon-instagram"></span></a>
+              <a href="https://www.linkedin.com/in/workvat-online-700898195" target="_blank"><span class="icon-linkedin"></span></a>
+            </div>
+          </div>
+        </div>
+
+       
+      </div>
+    </footer>
+  
+  </div>
+
+    <!-- SCRIPTS -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/stickyfill.min.js' %}"></script>
+    <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+    
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    
+    <script src="{% static 'js/custom.js' %}"></script>
+
+     
+  </body>
+</html>
