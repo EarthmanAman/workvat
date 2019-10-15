@@ -25,7 +25,7 @@ SECRET_KEY = '%p1-nw@z8=+x0evwcrx&k5xs9=3xvucj#dt=s^3l)5x@95-s$m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['workvat.com', 'www.workvat.com']
 
 
 # Application definition
@@ -85,10 +85,15 @@ WSGI_APPLICATION = 'workvat.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'workvat',
+        'USER': 'workvatdbuser',
+        'PASSWORD': 'workvat@db1-9',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
+
 
 
 # Password validation
