@@ -25,7 +25,7 @@ SECRET_KEY = '%p1-nw@z8=+x0evwcrx&k5xs9=3xvucj#dt=s^3l)5x@95-s$m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['workvat.com', 'www.workvat.com']
+ALLOWED_HOSTS = ['178.128.126.132', 'workvat.com', 'www.workvat.com']
 
 
 # Application definition
