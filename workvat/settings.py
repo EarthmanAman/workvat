@@ -130,22 +130,22 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
+# https://docs.djangoproject.com/en/2.2/howto/static-files
 
-
-STATIC_URL = '/static/'
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = 'static'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "staticfiles"),
 ]
 MEDIA_ROOT = "media"
 MEDIA_URL = '/media/'
 
-# EMAIL_USE_TLS = True
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = 'hashimathman@gmail.com'
-# EMAIL_HOST_PASSWORD = 'earthman@gmail123'
-# EMAIL_PORT = 587
+
+
+ EMAIL_USE_TLS = True
+ EMAIL_HOST = 'smtp.gmail.com'
+ EMAIL_HOST_USER = 'workvat@gmail.com'
+ EMAIL_HOST_PASSWORD = 'earthman@gmail123'
+ EMAIL_PORT = 587
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
