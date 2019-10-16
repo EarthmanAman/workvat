@@ -133,7 +133,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files
 
 STATIC_ROOT = 'static'
-STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "staticfiles"),
 ]
@@ -143,7 +142,7 @@ MEDIA_URL = '/media/'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'mail.workvat.com'
-EMAIL_HOST_USER = '_mainaccount@workvat.com'
+EMAIL_HOST_USER = 'info@workvat.com'
 EMAIL_HOST_PASSWORD = '51Gf!vL!2RyB2u'
 EMAIL_PORT = 1025
 
