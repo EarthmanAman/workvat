@@ -142,12 +142,12 @@ MEDIA_URL = '/media/'
 
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'workvat@gmail.com'
-EMAIL_HOST_PASSWORD = 'earthman@gmail123'
-EMAIL_PORT = 587
+EMAIL_HOST = 'mail.workvat.com'
+EMAIL_HOST_USER = '_mainaccount@workvat.com'
+EMAIL_HOST_PASSWORD = '51Gf!vL!2RyB2u'
+EMAIL_PORT = 1025
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 PAYPAL_RECEIVER_EMAIL = 'trialpaypalbusiness@test.com'
 PAYPAL_TEST = True
