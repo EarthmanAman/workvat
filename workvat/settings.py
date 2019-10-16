@@ -141,11 +141,13 @@ MEDIA_ROOT = "media"
 MEDIA_URL = '/media/'
 
 
+EMAIL_BACKEND = ‘django.core.mail.backends.smtp.EmailBackend’
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = True
 EMAIL_HOST = 'mail.workvat.com'
-EMAIL_HOST_USER = 'info@workvat.com'
-EMAIL_HOST_PASSWORD = '51Gf!vL!2RyB2u'
-EMAIL_PORT = 1025
+EMAIL_HOST_USER = 'accounts@workvat.com'
+EMAIL_HOST_PASSWORD = 'workvat@accounts'
+EMAIL_PORT =  465
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
