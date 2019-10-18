@@ -144,11 +144,11 @@
         <div class="row align-items-center">
           <div class="col-md-8">
             {% if request.user.is_authenticated %}
-            <h2 class="text-white">Find experience writters</h2>
-            <p class="mb-0 text-white lead">You state your price remember!!</p>
+            <h2 class="text-white">Find experience Freelancers</h2>
+            <!-- <p class="mb-0 text-white lead">You state your price remember!!</p> -->
             {% else %}
-             <h2 class="text-white">Do you need some help in your school work?</h2>
-            <p class="mb-0 text-white lead">Workvart is your best choice</p>
+             <h2 class="text-white">Do you need help in your school work?</h2>
+            <!-- <p class="mb-0 text-white lead">Workvart is your best choice</p> -->
             {% endif%}
           </div>
           <div class="col-md-3 ml-auto">
@@ -206,8 +206,10 @@
 
        
       </div>
+       <div align="center">
+        <p>Copyright @2019 - All Rights Reserved. Privacy Policy | Site Terms & Disclosures.Hosted by <a href="{% url 'assignment:index' %}" style="color: lightblue;">workvat.com</a></p>
+      </div>
     </footer>
-  
   </div>
 
     <!-- SCRIPTS -->

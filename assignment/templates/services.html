@@ -11,7 +11,7 @@
 {% block front %}
 	<div class="mb-5 text-center">
       <h1 class="text-white font-weight-bold">Our Services</h1>
-      <p>Find your dream jobs in our powerful career website template.</p>
+      <!-- <p>Find your dream jobs in our powerful career website template.</p> -->
     </div>
 {% endblock%}
 
@@ -27,7 +27,7 @@
         <a class="block__16443 text-center d-block">
           <span class="custom-icon mx-auto"><span class="icon-tasks d-block"></span></span>
           <h3>{{service.name}}</h3>
-          <p>{{service.desc}}</p>
+          <p>{{service.desc|safe}}</p>
         </a>
 
       </div>
