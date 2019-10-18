@@ -151,5 +151,5 @@ EMAIL_PORT =  465
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-PAYPAL_RECEIVER_EMAIL = 'trialpaypalbusiness@test.com'
+PAYPAL_RECEIVER_EMAIL = 'abuzonsystems@gmail.com'
 PAYPAL_TEST = True

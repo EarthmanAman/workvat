@@ -97,6 +97,7 @@
               <td>Type</td>
               <td>price</td>
               <td>More</td>
+              <td>Download</td>
             </tr>
           </thead>
           <tbody>
@@ -106,6 +107,7 @@
                 <td>{{assignment.assignmentType.name}}</td>
                 <td>{{assignment.assignmentpayment.userPrice}}</td>
                 <td><a href="{% url 'assignment:singleAssignment' assignment.id %}"><button class="btn btn-secondary">More</button></a></td>
+                <td><a href="{% url 'assignment:downloadFinished' assignment.assignmentmedia.id %}" class="icon-download"></a></td>
               </tr>
             {% endfor %}
           </tbody>
@@ -123,9 +125,9 @@
         <div class="row align-items-center">
           <div class="col-12 text-center mt-4 mb-5">
             <div class="row justify-content-center">
-              <div class="col-md-7">
+              <div class="col-md-12">
                 <h2 class="section-title mb-2">About Us</h2>
-                <p class="lead">We offer educational support to our customer by assisting them in various areas of speciality. We have quality staffs who are motivated in not just helping but also creating friendship</p>
+                <p class="lead">Workvat is an online freelance  website with experienced online freelance workers with over ten years’ experience in Delivery of ; Assignments , all types of Essays, article review, course work , business plan ,presentation or speech ,term paper, dissertation ,websites  applications and software computer projects, Projects Essays, Thesis Papers, Dissertations, publications and other academic works. Students and Writers communicate directly, without intermediaries...</p>
               </div>
             </div>
             
