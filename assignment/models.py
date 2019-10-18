@@ -5,7 +5,8 @@ from ckeditor.fields import RichTextField
 
 class AssignmentType(models.Model):
 	name = models.CharField(max_length=100)
-	desc = RichTextField()
+	desc = models.TextField(blank=True, null=True)
+	trend = models.BooleanField(default=False)
 
 	averagePrice = models.FloatField(blank=True, null=True)
 
@@ -30,7 +31,8 @@ class UserAssignment(models.Model):
 	citation 		= models.CharField(max_length=100, blank=True, null=True)
 	font 			= models.CharField(max_length=100, default="Times New Roman")
 	fontSize 		= models.FloatField(default=12.0)
-
+	pages 			= models.FloatField(blank=True, null=True)
+	
 	expectedDate 	= models.DateField(auto_now_add=True, blank=True, null=True)
 	dateRequested 	= models.DateTimeField(auto_now_add=True)
 	dateCompleted 	= models.DateTimeField(blank=True,  null=True)

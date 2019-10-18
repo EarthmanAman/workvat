@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 {% load static %}
 {% block title %}
-  Add
+  | Add
 {% endblock %}
 {% block front%}
 	<div class="mb-5 text-center">
@@ -83,11 +83,15 @@
                 </div>
               </div>
               <div class="row form-group mb-5">
-                <div class="col-md-6 mb-3 mb-md-0">
+                <div class="col-md-4 mb-3 mb-md-0">
                   <label class="font-weight-bold" for="fullname">Quote Your Price</label>
                   <input type="number" id="fullname" class="form-control" placeholder="e.g 30" name="userPrice">
                 </div>
-                <div class="col-md-6 mb-3 mb-md-0">
+                <div class="col-md-4 mb-3 mb-md-0">
+                  <label class="font-weight-bold" for="fullname">Pages</label>
+                  <input type="number" id="fullname" class="form-control" name="pages">
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
                   <label class="font-weight-bold" for="fullname">Currency</label>
                   <select class="form-control"  name="currency">
                     <option>USD</option>

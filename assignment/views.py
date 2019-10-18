@@ -99,6 +99,7 @@ def addAssignment(request):
 		fontSize = float(request.POST.get("fontSize"))
 		currency = request.POST.get("currency")
 		file = request.FILES.get("file")
+		pages = request.POST.get("pages", None)
 		assignment = UserAssignment(
 			user=request.user,
 			assignmentType=assignmentType,
@@ -108,6 +109,7 @@ def addAssignment(request):
 			citation=citation,
 			font=fontType,
 			fontSize=fontSize,
+			pages = pages,
 			)
 		assignment.save()
 		if file:
