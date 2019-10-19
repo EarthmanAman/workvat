@@ -4,7 +4,7 @@
   | Add
 {% endblock %}
 {% block front%}
-	<div class="mb-5 text-center">
+  <div class="mb-5 text-center">
       <h1 class="text-white font-weight-bold">Add Job</h1>
       <p>Add Your Job</p>
     </div>
@@ -23,7 +23,7 @@
         
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="font-weight-bold" for="fullname">Type</label>
+                  <label class="font-weight-bold">Type</label>
                   <select name="assignmentType" class="form-control" id="">
                     {% for assignmentType in assignmentsTypes%}
                       <option value="{{assignmentType.id}}">{{assignmentType.name}}</option>
@@ -33,13 +33,13 @@
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="font-weight-bold" for="fullname">Job Title</label>
+                  <label class="font-weight-bold">Job Title</label>
                   <input type="text" id="fullname" class="form-control" name="title">
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="font-weight-bold" for="fullname">Job Description</label>
+                  <label class="font-weight-bold">Job Description</label>
                   <!-- <textarea type="text" id="fullname" class="form-control" cols="30" rows="10" name="desc"></textarea>  -->
                   {{form.media}}
                   {% for field in form%}
@@ -52,7 +52,7 @@
               <div class="row form-group">
                 
                 <div class="col-md-4 mb-3 mb-md-0">
-                  <label class="font-weight-bold" for="fullname">Citation</label>
+                  <label class="font-weight-bold">Citation</label>
                   <select class="form-control"  name="citation">
                     <option>AM</option>
                     <option>AM</option>
@@ -60,14 +60,14 @@
                   <!-- <input type="date" name="expectedDate" class="form-control"> -->
                 </div>
                 <div class="col-md-4 mb-3 mb-md-0">
-                  <label class="font-weight-bold" for="fullname">Font Type</label>
+                  <label class="font-weight-bold">Font Type</label>
                   <select class="form-control"  name="fontType">
                     <option>AM</option>
                     <option>AM</option>
                   </select>
                 </div>
                 <div class="col-md-4 mb-3 mb-md-0">
-                  <label class="font-weight-bold" for="fullname">Font Size</label>
+                  <label class="font-weight-bold">Font Size</label>
                   <select class="form-control"  name="fontSize">
                     <option>10</option>
                     <option>12</option>
@@ -78,21 +78,26 @@
               <div class="row form-group">
                 
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="font-weight-bold" for="fullname">Deadline</label>
+                  <label class="font-weight-bold">Deadline</label>
                   <input type="date" name="expectedDate" class="form-control">
                 </div>
               </div>
               <div class="row form-group mb-5">
-                <div class="col-md-4 mb-3 mb-md-0">
-                  <label class="font-weight-bold" for="fullname">Quote Your Price</label>
-                  <input type="number" id="fullname" class="form-control" placeholder="e.g 30" name="userPrice">
+                <div class="col-md-3 mb-3 mb-md-0">
+                  <p style="color: red; display: none;" id="priceError">Enter price</p>
+                  <label class="font-weight-bold" >Your Price(per page)</label>
+                  <input type="number" class="form-control" placeholder="e.g 30" name="userPrice" id="price" onchange="removeError(event)" required>
                 </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                  <label class="font-weight-bold" for="fullname">Pages</label>
-                  <input type="number" id="fullname" class="form-control" name="pages">
+                <div class="col-md-3 mb-3 mb-md-0">
+                  <label class="font-weight-bold" >Pages</label>
+                  <input type="number" class="form-control" name="pages" id="pages" onblur="totalIn(event)" required>
                 </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                  <label class="font-weight-bold" for="fullname">Currency</label>
+                 <div class="col-md-3 mb-3 mb-md-0">
+                  <label class="font-weight-bold" >Total</label>
+                  <input type="number" class="form-control" name="pages" id="total" readonly>
+                </div>
+                <div class="col-md-3 mb-3 mb-md-0">
+                  <label class="font-weight-bold" >Currency</label>
                   <select class="form-control"  name="currency">
                     <option>USD</option>
                     <option>EURO</option>
@@ -101,8 +106,8 @@
               </div>
                <div class="row form-group mb-5">
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <label class="font-weight-bold" for="fullname">Document</label>
-                  <input type="file" id="fullname" class="form-control" name="file">
+                  <label class="font-weight-bold">Document</label>
+                  <input type="file" class="form-control" name="file">
                 </div>
               </div>
 
@@ -165,12 +170,37 @@
             
             <div class="p-4 mb-3 bg-white">
               <h3 class="h5 text-black mb-3">More Info</h3>
-              <p>Payment is done half way when the writer send you a preview of the work and when the work is completed</p>
-              <p><a href="#" class="btn btn-primary  py-2 px-4">Learn More</a></p>
+              <p>Payment is done after completion of the work</p>
+              <p><a href="{% url 'accounts:about'%}" class="btn btn-primary  py-2 px-4">Learn More</a></p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <script type="text/javascript">
+      function totalIn(event){
+        event.preventDefault();
+        if (document.getElementById('price').value === "") {
+          document.getElementById('priceError').style.display = "block";
+          document.getElementById('price').autofocus= true;
+           
+        }
+        else {
+          price = document.getElementById('price').value
+          pages = document.getElementById('pages').value;
+          total = price * pages;
+          document.getElementById('total').value = total;
+        }
+      }
+
+      function removeError(event){
+        event.preventDefault()
+        document.getElementById('priceError').style.display = 'none';
+        price = document.getElementById('price').value;
+        pages = document.getElementById('pages').value;
+        total = price * pages;
+        document.getElementById('total').value = total;
+      }
+    </script>
 {% endblock%}
