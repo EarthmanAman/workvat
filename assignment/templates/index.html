@@ -96,8 +96,8 @@
               <td>Name</td>
               <td>Type</td>
               <td>price</td>
-              <td>More</td>
               <td>Download</td>
+              <td>More</td>
             </tr>
           </thead>
           <tbody>
@@ -106,8 +106,9 @@
                 <td>{{assignment.title}}</td>
                 <td>{{assignment.assignmentType.name}}</td>
                 <td>{{assignment.assignmentpayment.userPrice}}</td>
+                 <td><a href="{% url 'assignment:downloadFinished' assignment.assignmentmedia.id %}" class="icon-download"></a></td>
                 <td><a href="{% url 'assignment:singleAssignment' assignment.id %}"><button class="btn btn-secondary">More</button></a></td>
-                <td><a href="{% url 'assignment:downloadFinished' assignment.assignmentmedia.id %}" class="icon-download"></a></td>
+               
               </tr>
             {% endfor %}
           </tbody>
