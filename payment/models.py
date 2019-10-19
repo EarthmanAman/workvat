@@ -9,3 +9,6 @@ class AssignmentPayment(models.Model):
 
 	halfPaid 		= models.BooleanField(default=False)
 	fullPaid 		= models.BooleanField(default=False)
+
+	def __str__(self):
+		return str(self.userAssignment.__str__()) + " - " + str(self.userPrice) + " - " + str(self.fullPaid) 

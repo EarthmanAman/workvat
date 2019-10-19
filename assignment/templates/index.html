@@ -93,11 +93,11 @@
         <table class="table table-stripped">
           <thead>
             <tr>
-              <td>Name</td>
-              <td>Type</td>
-              <td>price</td>
-              <td>Download</td>
-              <td>More</td>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Price(per page)</th>
+              <th>Download</th>
+              <th>More</th>
             </tr>
           </thead>
           <tbody>
@@ -107,7 +107,8 @@
                 <td>{{assignment.assignmentType.name}}</td>
                 <td>{{assignment.assignmentpayment.userPrice}}</td>
                  <td><a href="{% url 'assignment:downloadFinished' assignment.assignmentmedia.id %}" class="icon-download"></a></td>
-                <td><a href="{% url 'assignment:singleAssignment' assignment.id %}"><button class="btn btn-secondary">More</button></a></td>
+               <td><a href="{% url 'assignment:singleAssignment' assignment.id %}"><h1 class="icon-navigate_next" style="color: green; font-size: 40px;"></h1></a></td>
+
                
               </tr>
             {% endfor %}
