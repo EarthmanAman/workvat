@@ -27,13 +27,33 @@
         <a class="block__16443 text-center d-block">
           <span class="custom-icon mx-auto"><span class="icon-tasks d-block"></span></span>
           <h3>{{service.name}}</h3>
-          <p>$ {{service.averagePrice}}</p>
+          <p>$ {{service.averagePrice}} (per page)</p>
         </a>
 
       </div>
       {% endfor %}
     </div>
-
+     {% if services.has_other_pages %}
+        <ul class="pagination">
+          {% if services.has_previous %}
+            <li><a href="?page={{ services.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+          {% endif %}
+          {% for i in services.paginator.page_range %}
+            {% if services.number == i %}
+              <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+              <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+          {% endfor %}  
+          {% if services.has_next %}
+            <li><a href="?page={{ services.next_page_number }}">&raquo;</a></li>
+          {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+          {% endif %}
+        </ul>
+      {% endif %}
 
   </div>
 </section>

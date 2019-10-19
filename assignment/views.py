@@ -44,7 +44,16 @@ def services(request):
 	template_name = "./services.html"
 	servicesIn = AssignmentType.objects.all()
 	testimonials = Testimonial.objects.all()
-	context = {"services":servicesIn, "testimonials":testimonials}
+	page = request.GET.get('page', 1)
+
+	paginator = Paginator(servicesIn, 8)
+	try:
+		services = paginator.page(page)
+	except PageNotAnInteger:
+		services = paginator.page(1)
+	except EmptyPage:
+		services = paginator.page(paginator.num_pages)
+	context = {"services":services, "testimonials":testimonials}
 	return render(request, template_name, context)
 
 @login_required
