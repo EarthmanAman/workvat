@@ -142,7 +142,7 @@ MEDIA_URL = '/media/'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
+# EMAIL_USE_TLS = True
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'mail.workvat.com'
 EMAIL_HOST_USER = 'accounts@workvat.com'
@@ -152,4 +152,4 @@ EMAIL_PORT =  465
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 PAYPAL_RECEIVER_EMAIL = 'abuzonsystems@gmail.com'
-PAYPAL_TEST = True
+PAYPAL_TEST = False
