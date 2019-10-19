@@ -46,7 +46,7 @@ def services(request):
 	testimonials = Testimonial.objects.all()
 	page = request.GET.get('page', 1)
 
-	paginator = Paginator(servicesIn, 8)
+	paginator = Paginator(servicesIn, 12)
 	try:
 		services = paginator.page(page)
 	except PageNotAnInteger:
