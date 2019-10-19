@@ -61,10 +61,10 @@ def singleAssignment(request, assignment_id):
 	template_name = "./singleAssignment.html"
 	assignment = UserAssignment.objects.get(pk=assignment_id)
 	host = request.get_host()
-
+	total = assignment.assignmentpayment.userPrice * assignment.pages
 	paypal_dict = {
 		'business': settings.PAYPAL_RECEIVER_EMAIL,
-		'amount': '%.2f' % assignment.assignmentpayment.userPrice * assignment.pages,
+		'amount': '%.2f' % total,
 		'item_name': 'Order {}'.format(assignment_id),
 		'invoice' : str(assignment_id),
 		'currency_code': 'USD',
