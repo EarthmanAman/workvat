@@ -15,7 +15,8 @@ def payment_done(request, assignmentId):
 	assignmentPay = assignment.assignmentpayment
 	assignmentPay.fullPaid = True
 	assignmentPay.save()
-	return render(request, template_name)
+	context = {'assignment':assignment}
+	return render(request, template_name, context)
 
 @csrf_exempt
 def payment_canceled(request):

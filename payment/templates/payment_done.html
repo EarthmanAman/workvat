@@ -1,5 +1,18 @@
 {% extends 'base.html'%}
 
 {% block content %}
-	<h1>Your Payment was successful</h1>
+	<br><br>
+	<div class="container">
+		<div class="row">
+			<div class="jumbotron">
+			  <h1 class="display-4">Hello {{request.user.first_name}} {{request.user.last_name}}</h1>
+			  <p class="lead alert alert-success ">You Payment was successful. Thank you</p>
+			  <hr class="my-4">
+			  <p></p>
+			  <p class="lead">
+			    <a class="btn btn-primary btn-lg" href="{% url 'assignment:singleAssignment' assignment.id %}" role="button">Back to Job</a>
+			  </p>
+			</div>
+	
+	</div>
 {% endblock%}
