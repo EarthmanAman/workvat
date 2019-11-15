@@ -31,10 +31,10 @@ def signup(request):
         current_site = get_current_site(request)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = account_activation_token.make_token(user)
-        activation_link = "{0}/accounts/activate/{1}/{2}".format("http://127.0.0.1:8000", uid, token)
+        activation_link = "{0}/accounts/activate/{1}/{2}".format("https://workvat.com", uid, token)
         message = "Hello {0},\n {1}".format(user.first_name, activation_link)
         to_email = email
-        email = EmailMessage(mail_subject, message, to=[to_email])
+        email = EmailMessage(mail_subject, message, 'info@workvat.com', to=[to_email])
         email.send()
         return render(request, './confirm_email.html')
     return redirect("assignment:index")
