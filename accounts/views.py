@@ -106,7 +106,7 @@ def contact(request):
         
         message = "Customer Name: {} {}\nCustomer Email : {} \n Message {}".format(firstName, lastName, email, message)
         to_email = email
-        email = EmailMessage(mail_subject, message, to=[to_email])
+        email = EmailMessage(mail_subject, message, to=['info@workvat.com'])
         email.send()
         # send_mail(mail_subject, message, email, ['hashimathman@gmail.com'], fail_silently=False,)
         send = True
