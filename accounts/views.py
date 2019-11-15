@@ -105,10 +105,10 @@ def contact(request):
         mail_subject = request.POST.get("subject")
         
         message = "Customer Name: {} {}\nCustomer Email : {} \n Message {}".format(firstName, lastName, email, message)
-        # to_email = email
-        # email = EmailMessage(mail_subject, message, to=[to_email])
-        # email.send()
-        send_mail(mail_subject, message, email, ['hashimathman@gmail.com'], fail_silently=False,)
+        to_email = email
+        email = EmailMessage(mail_subject, message, to=[to_email])
+        email.send()
+        # send_mail(mail_subject, message, email, ['hashimathman@gmail.com'], fail_silently=False,)
         send = True
     context = {'send':send}
     return render(request, template_name, context)
