@@ -6,9 +6,15 @@ from paypal.standard.forms import PayPalPaymentsForm
 from assignment.models import UserAssignment
 from django.views.decorators.csrf import csrf_exempt
 
+from assignment.models import Assignment
+
 @csrf_exempt
-def payment_done(request):
+def payment_done(request, assignmentId):
 	template_name = './payment_done.html'
+	assignment = Assignment.objects.get(pk=assignmentId)
+	assignmentPay = assignment.assignmentpayment
+	assignmentPay.fullPaid = True
+	assignmentPay.save()
 	return render(request, template_name)
 
 @csrf_exempt
