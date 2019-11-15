@@ -65,7 +65,7 @@ def singleAssignment(request, assignment_id):
 	paypal_dict = {
 		'business': settings.PAYPAL_RECEIVER_EMAIL,
 		# 'amount': '%.2f' % total,
-		'amount': '0',
+		'amount': '1',
 		'item_name': 'Order {}'.format(assignment_id),
 		'invoice' : str(assignment_id),
 		'currency_code': 'USD',
