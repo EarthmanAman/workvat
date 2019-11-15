@@ -19,9 +19,11 @@ def payment_done(request, assignmentId):
 	return render(request, template_name, context)
 
 @csrf_exempt
-def payment_canceled(request):
+def payment_canceled(request, assignmentId):
 	template_name = './payment_canceled.html'
-	return render(request, template_name)
+	assignment = UserAssignment.objects.get(pk=assignmentId)
+	context = {'assignment':assignment}
+	return render(request, template_name, context)
 
 
 

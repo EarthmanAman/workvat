@@ -71,7 +71,7 @@ def singleAssignment(request, assignment_id):
 		'currency_code': 'USD',
 		'notify_url':'http://{}{}'.format(host, reverse('paypal-ipn')),
 		'return_url': 'http://{}{}'.format(host, reverse('payment:payment_done', kwargs={'assignmentId':assignment_id})),
-		'cancel_return':'http://{}{}'.format(host, reverse('payment:payment_canceled')),
+		'cancel_return':'http://{}{}'.format(host, reverse('payment:payment_canceled', kwargs={'assignmentId':assignment_id})),
 	}
 	form = PayPalPaymentsForm(initial=paypal_dict)
 

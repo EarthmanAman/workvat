@@ -25,7 +25,7 @@ app_name = "payment"
 
 urlpatterns = [
     path('payment_done/<int:assignmentId>/', payment_done, name="payment_done"),
-    path('payment_canceled/', payment_canceled, name="payment_canceled"),
+    path('payment_canceled/<int:assignmentId>/', payment_canceled, name="payment_canceled"),
     path('payment_process/<int:assignment_id>/', payment_process, name="payment_process"),
    
 ] 
