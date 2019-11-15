@@ -153,4 +153,4 @@ DEFAULT_FROM_EMAIL = 'info@workvat.com'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 PAYPAL_RECEIVER_EMAIL = 'abuzonsystems@gmail.com'
-PAYPAL_TEST = True
+PAYPAL_TEST = False
