@@ -143,11 +143,12 @@ MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_USE_TLS = True
-EMAIL_USE_SSL = True
-EMAIL_HOST = 'mail.workvat.com'
-EMAIL_HOST_USER = 'accounts@workvat.com'
-EMAIL_HOST_PASSWORD = 'workvat@accounts'
-EMAIL_PORT =  465
+SENDGRID_API_KEY = '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'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
