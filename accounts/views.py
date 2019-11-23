@@ -103,7 +103,7 @@ def contact(request):
             email = request.POST.get("email")
         message = request.POST.get("message")
         mail_subject = request.POST.get("subject")
-        
+        zzzzzzzzzz
         message = "Customer Name: {} {}\nCustomer Email : {} \n Message {}".format(firstName, lastName, email, message)
         to_email = email
         email = EmailMessage(mail_subject, message, to=['info@workvat.com'])
