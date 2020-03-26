@@ -32,6 +32,7 @@ def index(request):
 	completedAssignmentsCount = UserAssignment.objects.filter(completed=True).count()
 	testimonials = Testimonial.objects.all()
 	userAv = request.session.get("userAv")
+	request.session["userAv"] = False
 	context = {
 			 "users":users,
 			 "assignments":assignments,
