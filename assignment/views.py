@@ -31,12 +31,14 @@ def index(request):
 	assignments = UserAssignment.objects.filter(is_sample=True)
 	completedAssignmentsCount = UserAssignment.objects.filter(completed=True).count()
 	testimonials = Testimonial.objects.all()
+	userAv = request.session.get("userAv")
 	context = {
 			 "users":users,
 			 "assignments":assignments,
 			 "assignmentsCount":assignmentsCount, 
 			 "completedAssignmentsCount":completedAssignmentsCount,
 			 'testimonials':testimonials,
+			 "userAv":userAv
 			 }
 	return render(request, template_name, context)
 

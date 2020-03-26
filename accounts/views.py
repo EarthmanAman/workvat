@@ -17,26 +17,31 @@ from django.contrib.auth.models import User
 
 
 def signup(request):
+    request.session["userAv"] = False
     if request.method == "POST":
         firstName = request.POST.get("firstName")
         lastName = request.POST.get("lastName")
         email = request.POST.get("email")
-        user = User(username=email, first_name=firstName, last_name=lastName, email=email)
-        user.set_unusable_password()
-        user.is_active = False
-        user.save()
+        userExist = User.objects.filter(email=email)
+        if userExist.exists():
+            request.session["userAv"] = True
+        else:
+            user = User(username=email, first_name=firstName, last_name=lastName, email=email)
+            user.set_unusable_password()
+            user.is_active = False
+            user.save()
 
-        # Send an email to the user with the token:
-        mail_subject = 'Activate your account.'
-        current_site = get_current_site(request)
-        uid = urlsafe_base64_encode(force_bytes(user.pk))
-        token = account_activation_token.make_token(user)
-        activation_link = "{0}/accounts/activate/{1}/{2}".format("https://workvat.com", uid, token)
-        message = "Hello {0},\n {1}".format(user.first_name, activation_link)
-        to_email = email
-        email = EmailMessage(mail_subject, message, 'info@workvat.com', to=[to_email])
-        email.send()
-        return render(request, './confirm_email.html')
+            # Send an email to the user with the token:
+            mail_subject = 'Activate your account.'
+            current_site = get_current_site(request)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            token = account_activation_token.make_token(user)
+            activation_link = "{0}/accounts/activate/{1}/{2}".format("https://workvat.com", uid, token)
+            message = "Hello {0},\n {1}".format(user.first_name, activation_link)
+            to_email = email
+            email = EmailMessage(mail_subject, message, 'info@workvat.com', to=[to_email])
+            email.send()
+            return render(request, './confirm_email.html')
     return redirect("assignment:index")
 
 def activate(request, uidb64, token):
