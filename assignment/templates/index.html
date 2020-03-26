@@ -14,7 +14,9 @@
               <br><a href="{% url 'assignment:services'%}"><button class="btn btn-light btn-outline-primary" style="background-color:transparent"><h3 style="color: white;">Check pricing</h3></button></a>
             </div>
             {% if userAv%}
-                  <p style="color:red">Email already exist</p>
+                <div align="center">
+                  <p style="color:red; font-size: 20px;">User with this email already exist</p>
+                </div>
                 {% endif%}
             {% if not request.user.is_authenticated%}
             <form method="post" class="search-jobs-form" action="{% url 'accounts:signup'%}">
@@ -22,7 +24,7 @@
               <div class="row mb-5">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <input type="text" class="form-control form-control-lg" placeholder="First Name" name="firstName" required>
-                </div>
+                </div>x
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <input type="text" class="form-control form-control-lg" placeholder="Last Name" name="lastName" required>
                 </div>
